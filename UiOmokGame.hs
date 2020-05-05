@@ -34,28 +34,30 @@ module UiOmokGame where
         readXY bd p
 
 
- board = mkBoard 15
+
 
  playingGame bd player = do 
-  positionPlayer <- readXY board player
-  let x = fst positionPlayer
-      y = snd positionPlayer in
-       if x == -1
-        then die "Thank you for playing"
-        else 
-          if y == -1
+  if isFull bd == True
+    then die "Thank you for playing"
+  else do
+   positionPlayer <- readXY bd player
+   let x = fst positionPlayer
+       y = snd positionPlayer in
+        if x == -1
+         then die "Thank you for playing"
+         else 
+           if y == -1
             then die "Thank you for playing"
             else
               if player == mkPlayer
                 then let x = fst positionPlayer
                          y = snd positionPlayer
-                         new = mark x y board 1 in putStrLn(boardToStr playerToChar new)
+                         new = mark x y bd 1 in do putStrLn(boardToStr playerToChar new)
+                                                   playingGame new mkOpponent
                 else let x = fst positionPlayer
                          y = snd positionPlayer
-                         new = mark x y board 2 in putStrLn(boardToStr playerToChar new)
+                         new = mark x y bd 2 in do putStrLn(boardToStr playerToChar new)
+                                                   playingGame new mkPlayer
   
-  if player == 'O'
-    then playingGame board mkOpponent
-    else playingGame board mkPlayer
   --bd <- mark x y bd 'O'
   --putStrLn (boardToStr playerToChar bd)

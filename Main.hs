@@ -5,7 +5,7 @@ module Main where
  import StoneandMovement
  import UiOmokGame
 
- bd = mkBoard 15
+ bd = mkBoard 16
  player = mkPlayer
  main = do
   playingGame bd player
