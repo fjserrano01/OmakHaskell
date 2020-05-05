@@ -1,6 +1,7 @@
 module UiOmokGame where 
  import System.IO
  import System.Random
+ import System.Exit
  import BoardElements
  import StoneandMovement
   --For reading user input
@@ -10,8 +11,6 @@ module UiOmokGame where
   2 -> 'X'
   x -> '.'
  
- --readInts :: IO [Int]
- --readInts = fmap (map read.words) getLine
 
  
  readXY bd p = do
@@ -22,24 +21,41 @@ module UiOmokGame where
       let x = head parsed
           new = tail parsed
           y = head new in 
-           if isEmpty x y bd then return (x, y)
-            else readXY bd p 
-     else readXY bd p
+           if x == -1
+              then return (x, y)
+              else 
+                if y == -1 
+                  then return (x, y)
+                  else 
+                    if isEmpty x y bd 
+                      then return (x, y)
+            else readXY bd p
+      else 
+        readXY bd p
 
 
  board = mkBoard 15
 
  playingGame bd player = do 
   positionPlayer <- readXY board player
+  let x = fst positionPlayer
+      y = snd positionPlayer in
+       if x == -1
+        then die "Thank you for playing"
+        else 
+          if y == -1
+            then die "Thank you for playing"
+            else
+              if player == mkPlayer
+                then let x = fst positionPlayer
+                         y = snd positionPlayer
+                         new = mark x y board 1 in putStrLn(boardToStr playerToChar new)
+                else let x = fst positionPlayer
+                         y = snd positionPlayer
+                         new = mark x y board 2 in putStrLn(boardToStr playerToChar new)
+  
   if player == 'O'
-    then let x = fst positionPlayer
-             y = snd positionPlayer
-             new = mark x y board 1 in putStrLn(boardToStr playerToChar new)
-    else let x = fst positionPlayer
-             y = snd positionPlayer
-             new = mark x y board 2 in putStrLn(boardToStr playerToChar new)
-  if player == 'O'
-    then playingGame board mkPlayer
-    else playingGame board mkOpponent
+    then playingGame board mkOpponent
+    else playingGame board mkPlayer
   --bd <- mark x y bd 'O'
   --putStrLn (boardToStr playerToChar bd)
