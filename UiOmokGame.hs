@@ -26,17 +26,20 @@ module UiOmokGame where
             else readXY bd p 
      else readXY bd p
 
- --getX parsed = do 
-  --let (x,_) = parsed in return x
- --getY parsed = do
-  --let (_, y) = parsed in return y
- bd = mkBoard 15
- playingGame = do 
-  --p <- mkPlayer
-  positionPlayer <- readXY bd 'O'
-  let x = fst positionPlayer
-      y = snd positionPlayer 
-      new = mark x y bd 1 in putStrLn (boardToStr playerToChar new)
+
+ board = mkBoard 15
+
+ playingGame bd player = do 
+  positionPlayer <- readXY board player
+  if player == 'O'
+    then let x = fst positionPlayer
+             y = snd positionPlayer
+             new = mark x y board 1 in putStrLn(boardToStr playerToChar new)
+    else let x = fst positionPlayer
+             y = snd positionPlayer
+             new = mark x y board 2 in putStrLn(boardToStr playerToChar new)
+  if player == 'O'
+    then playingGame board mkPlayer
+    else playingGame board mkOpponent
   --bd <- mark x y bd 'O'
-  putStrLn (boardToStr playerToChar bd)
-  playingGame
+  --putStrLn (boardToStr playerToChar bd)

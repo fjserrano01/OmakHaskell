@@ -5,8 +5,9 @@ module Main where
  import StoneandMovement
  import UiOmokGame
 
-
+ bd = mkBoard 15
+ player = mkPlayer
  main = do
-  playingGame
+  playingGame bd player
 
   --putStrLn "Enter x y (1-15 or -1 to quit)?"
