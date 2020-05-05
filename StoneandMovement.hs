@@ -52,3 +52,5 @@ module StoneandMovement where
 
  pos _ [] = []
  pos f (h:t) = f h : ' ' : pos f t
+
+ --isWonBy bd p = 

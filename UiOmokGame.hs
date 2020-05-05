@@ -36,6 +36,7 @@ module UiOmokGame where
   positionPlayer <- readXY bd 'O'
   let x = fst positionPlayer
       y = snd positionPlayer 
+      new = mark x y bd 1 in putStrLn (boardToStr playerToChar new)
   --bd <- mark x y bd 'O'
   putStrLn (boardToStr playerToChar bd)
   playingGame

@@ -5,7 +5,7 @@ module Main where
  import StoneandMovement
  import UiOmokGame
 
- 
+
  main = do
   playingGame
 
