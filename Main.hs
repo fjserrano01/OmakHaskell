@@ -1,3 +1,4 @@
+--Fernando Serrano, Omok game, PL
 module Main where
  import System.IO
  import System.Random
@@ -7,6 +8,7 @@ module Main where
 
  bd = mkBoard 16
  player = mkPlayer
+ --To run game type playingGame bd player in terminal
  main = do
   playingGame bd player
 

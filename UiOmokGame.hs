@@ -35,7 +35,7 @@ module UiOmokGame where
 
 
 
-
+ 
  playingGame bd player = do 
   if isFull bd == True
     then die "Thank you for playing"
@@ -58,6 +58,3 @@ module UiOmokGame where
                          y = snd positionPlayer
                          new = mark x y bd 2 in do putStrLn(boardToStr playerToChar new)
                                                    playingGame new mkPlayer
-  
-  --bd <- mark x y bd 'O'
-  --putStrLn (boardToStr playerToChar bd)
